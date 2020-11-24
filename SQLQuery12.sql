@@ -36,7 +36,7 @@ WHERE g.Label = 'jazz' OR g.Label ='rock';
 
 SELECT Title, AlbumLength
 FROM Album
-WHERE AlbumLength < 500;
+WHERE AlbumLength IS NULL;
 
 --7 Using the INSERT statement, add one of your favorite artists to the Artist table.
 
@@ -45,19 +45,18 @@ INSERT INTO Genre (Label) VALUES ('Alternative');
 
 --8 Using the INSERT statement, add one, or more, albums by your artist to the Album table.
 
-INSERT INTO Album (Title, ReleaseDate, AlbumLength, Label, ArtistId) VALUES ('Amnesiac', 2001, 44, 'Alternative', 31)
-
+INSERT INTO Album (Title, ReleaseDate, AlbumLength, Label, ArtistId, GenreId) VALUES ('Amnesiac', 2001, 44, 'Parlophone', 31, 15)
 
 --9 Using the INSERT statement, add some songs that are on that album to the Song table.
 
 INSERT INTO Song(Title, SongLength, ReleaseDate, GenreId, ArtistId, AlbumId) 
-VALUES ('Pyramid Song', 4, 05/16/2001, 15, 31, 26) 
+VALUES ('Pyramid Song', 4, 05/16/2001, 15, 31, 27) 
 
 INSERT INTO Song(Title, SongLength, ReleaseDate, GenreId, ArtistId, AlbumId) 
-VALUES ('I Might Be Wrong', 5, 06/04/2001, 15, 31, 26)
+VALUES ('I Might Be Wrong', 5, 06/04/2001, 15, 31, 27)
 
 INSERT INTO Song(Title, SongLength, ReleaseDate, GenreId, ArtistId, AlbumId) 
-VALUES ('Knives Out', 4, 08/06/2001, 15, 31, 26)
+VALUES ('Knives Out', 4, 08/06/2001, 15, 31, 27)
 
 --10 Write a SELECT query that provides the song titles, album title, and artist name for all of the data you just entered in. Use the LEFT JOIN keyword sequence to connect the tables, and the WHERE keyword to filter the results to the album and artist you added.
 
@@ -72,6 +71,11 @@ SELECT s.title as SongTitle, al.title as AlbumTitle, a.ArtistName
 --SELECT a.Title, s.Title FROM Song s LEFT JOIN Album a ON s.AlbumId = a.Id;
 
 --11 Write a SELECT statement to display how many songs exist for each album. You'll need to use the COUNT() function and the GROUP BY keyword sequence.
+
+SELECT al.Title, COUNT(s.id) as numOfSongsPerAlbum
+FROM Song s
+left JOIN Album al on s.AlbumId = al.id
+GROUP BY al.Title
 
 --12 Write a SELECT statement to display how many songs exist for each artist. You'll need to use the COUNT() function and the GROUP BY keyword sequence.
 
