@@ -84,6 +84,10 @@ FROM Song s
 left JOIN Artist a on s.ArtistId = a.id
 GROUP BY ArtistName;
 --13 Write a SELECT statement to display how many songs exist for each genre. You'll need to use the COUNT() function and the GROUP BY keyword sequence.
+SELECT Label, COUNT(s.id) as numOfSongsPerGenre
+FROM Song s
+left JOIN Genre g on s.GenreId = g.id
+GROUP BY Label;
 
 --14 Write a SELECT query that lists the Artists that have put out records on more than one record label. Hint: When using GROUP BY instead of using a WHERE clause, use the HAVING keyword
 
